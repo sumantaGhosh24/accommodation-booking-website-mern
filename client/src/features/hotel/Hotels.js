@@ -5,25 +5,13 @@ import {toast, ToastContainer} from "react-toastify";
 import {HotelCard} from "../../components";
 
 import useTitle from "../../hooks/useTitle";
-import CategoryHotel from "./CategoryHotel";
 import {useGetHotelsQuery, useGetHotelsSearchQuery} from "./hotelApiSlice";
 import SearchHotel from "./SearchHotel";
 
 const Hotels = () => {
   useTitle("Hotels");
 
-  const [que, setQue] = useState({
-    search: "nihil",
-    sort: "-price",
-    limit: 25,
-  });
-
-  const {
-    data: hotels,
-    isFetching,
-    isLoading,
-    isError,
-  } = useGetHotelsSearchQuery(que);
+  const {data: hotels, isFetching, isLoading, isError} = useGetHotelsQuery();
 
   if (isLoading || isFetching) {
     return (
@@ -53,7 +41,6 @@ const Hotels = () => {
   return (
     <>
       <SearchHotel />
-      <CategoryHotel />
       <ToastContainer />
       {hotels.hotels.length === 0 ? (
         <h2 className="text-center fw-bold mt-5">

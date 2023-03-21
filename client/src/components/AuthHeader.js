@@ -42,6 +42,12 @@ const Header = () => {
         <Link to="/profile" className="nav-link text-white">
           Profile
         </Link>
+        <Link to="/ratings" className="nav-link text-white">
+          Rating
+        </Link>
+        <Link to="/booking" className="nav-link text-white">
+          Booking
+        </Link>
       </>
     );
   }

@@ -22,11 +22,7 @@ import {
   AdminEditBooking,
   AdminHotelBooking,
   AdminNewBooking,
-  Booking,
   Bookings,
-  DetailsBooking,
-  EditBooking,
-  NewBooking,
 } from "./features/booking";
 import {
   AdminCategoryList,
@@ -41,7 +37,7 @@ import {
   Hotel,
   Hotels,
 } from "./features/hotel";
-import {AdminRatingList, NewRating, Rating, Ratings} from "./features/rating";
+import {AdminRatingList, Rating, Ratings} from "./features/rating";
 import {AdminDetailUser, AdminEditUser, AdminUsersList} from "./features/user";
 
 const App = () => {
@@ -61,31 +57,11 @@ const App = () => {
               <Route path=":id" element={<RequireUser elm={<Hotel />} />} />
             </Route>
             <Route path="ratings">
-              <Route index element={<RequireUser elm={<Rating />} />} />
-              <Route
-                path="rating"
-                element={<RequireUser elm={<Ratings />} />}
-              />
-              <Route path="new" element={<RequireUser elm={<NewRating />} />} />
+              <Route index element={<RequireUser elm={<Ratings />} />} />
+              <Route path=":id" element={<RequireUser elm={<Rating />} />} />
             </Route>
             <Route path="booking">
-              <Route index element={<RequireUser elm={<Booking />} />} />
-              <Route
-                path="booking"
-                element={<RequireUser elm={<Bookings />} />}
-              />
-              <Route
-                path=":id"
-                element={<RequireUser elm={<EditBooking />} />}
-              />
-              <Route
-                path="detail/:id"
-                element={<RequireUser elm={<DetailsBooking />} />}
-              />
-              <Route
-                path="new"
-                element={<RequireUser elm={<NewBooking />} />}
-              />
+              <Route index element={<RequireUser elm={<Bookings />} />} />
             </Route>
 
             {/* admin routes */}

@@ -5,8 +5,6 @@ import {useSelector} from "react-redux";
 import CircleLoader from "react-spinners/CircleLoader";
 
 import useTitle from "../../hooks/useTitle";
-import {useGetUserBookingQuery} from "../booking/bookingApiSlice";
-import {useGetUserRatingsQuery} from "../rating/ratingApiSlice";
 import {useGetUserQuery} from "../user/usersApiSlice";
 import {selectCurrentToken} from "./authSlice";
 

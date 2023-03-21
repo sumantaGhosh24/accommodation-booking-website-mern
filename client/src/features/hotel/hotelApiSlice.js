@@ -3,7 +3,7 @@ import {apiSlice} from "../../app/api/apiSlice";
 export const hotelApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getHotels: builder.query({
-      query: () => `/hotels?limit=20`,
+      query: () => `/hotels?limit=10`,
       transformResponse: (response) => response,
       providesTags: (result, error, id) => [{type: "Hotel", id}],
     }),
@@ -15,7 +15,13 @@ export const hotelApiSlice = apiSlice.injectEndpoints({
         };
       },
     }),
+    getHotel: builder.query({
+      query: (id) => `/hotel/${id}`,
+      transformResponse: (response) => response,
+      providesTags: (result, error, id) => [{type: "Hotel", id}],
+    }),
   }),
 });
 
-export const {useGetHotelsQuery, useGetHotelsSearchQuery} = hotelApiSlice;
+export const {useGetHotelsQuery, useGetHotelsSearchQuery, useGetHotelQuery} =
+  hotelApiSlice;

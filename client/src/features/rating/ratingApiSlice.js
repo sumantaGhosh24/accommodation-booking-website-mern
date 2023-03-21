@@ -7,7 +7,34 @@ export const ratingApiSlice = apiSlice.injectEndpoints({
       transformResponse: (response) => response,
       providesTags: (result, error, id) => [{type: "Rating", id}],
     }),
+    getSingleRating: builder.query({
+      query: (id) => `/rating/${id}`,
+      transformResponse: (response) => response,
+      providesTags: (result, error, id) => [{type: "Rating", id}],
+    }),
+    updateRating: builder.mutation({
+      query: (data) => ({
+        url: `/rating/${data.id}`,
+        method: "PUT",
+        body: {
+          data,
+        },
+      }),
+      invalidatesTags: (result, error, id) => [{type: "Rating", id}],
+    }),
+    deleteRating: builder.mutation({
+      query: (id) => ({
+        url: `/rating/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: (result, error, id) => [{type: "Rating", id}],
+    }),
   }),
 });
 
-export const {useGetUserRatingsQuery} = ratingApiSlice;
+export const {
+  useGetUserRatingsQuery,
+  useGetSingleRatingQuery,
+  useUpdateRatingMutation,
+  useDeleteRatingMutation,
+} = ratingApiSlice;

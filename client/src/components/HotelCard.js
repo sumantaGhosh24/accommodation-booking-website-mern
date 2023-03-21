@@ -11,7 +11,7 @@ const HotelCard = ({hotel}) => {
     <>
       <Col key={hotel._id}>
         <Card>
-          {/* <Card.Img variant="top" src={hotel.images[0]} /> */}
+          <Card.Img variant="top" src={hotel.images[0]} />
           <Card.Body>
             <Card.Title className="text-capitalize fs-2 mb-4">
               {getWordStr(hotel.title, 5)}
@@ -37,7 +37,10 @@ const HotelCard = ({hotel}) => {
             </Card.Text>
           </Card.Body>
           <Card.Footer>
-            <Link to={`/hotel/${hotel._id}`} className="btn btn-primary btn-lg">
+            <Link
+              to={`/hotels/${hotel._id}`}
+              className="btn btn-primary btn-lg"
+            >
               Hotel Details
             </Link>
           </Card.Footer>

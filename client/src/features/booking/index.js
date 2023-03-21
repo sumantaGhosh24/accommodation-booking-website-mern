@@ -3,8 +3,4 @@ export {default as AdminDetailBooking} from "./AdminDetailBooking";
 export {default as AdminEditBooking} from "./AdminEditBooking";
 export {default as AdminHotelBooking} from "./AdminHotelBooking";
 export {default as AdminNewBooking} from "./AdminNewBooking";
-export {default as Booking} from "./Booking";
 export {default as Bookings} from "./Bookings";
-export {default as DetailsBooking} from "./DetailsBooking";
-export {default as EditBooking} from "./EditBooking";
-export {default as NewBooking} from "./NewBooking";
