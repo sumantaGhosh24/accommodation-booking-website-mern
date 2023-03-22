@@ -34,7 +34,7 @@ const Bookings = () => {
                 <CircleLoader color="#0D6EFD" size={480} />
               </div>
             )}
-            {bookings.length === 0 ? (
+            {bookings?.length === 0 ? (
               <h2 className="text-center fw-bold mt-5">
                 You have not any ratings yet.
               </h2>
@@ -58,7 +58,7 @@ const Bookings = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        {bookings.map((booking) => (
+                        {bookings?.map((booking) => (
                           <tr key={booking._id}>
                             <td>{booking._id}</td>
                             <td>{booking.hotel.title}</td>

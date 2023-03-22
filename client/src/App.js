@@ -18,19 +18,12 @@ import {
 } from "./features/auth";
 import {
   AdminBookingList,
-  AdminDetailBooking,
   AdminEditBooking,
   AdminHotelBooking,
-  AdminNewBooking,
   Bookings,
 } from "./features/booking";
+import {AdminCategoryList, AdminEditCategory} from "./features/category";
 import {
-  AdminCategoryList,
-  AdminEditCategory,
-  AdminNewCategory,
-} from "./features/category";
-import {
-  AdminDetailHotel,
   AdminEditHotel,
   AdminHotelList,
   AdminNewHotel,
@@ -38,7 +31,7 @@ import {
   Hotels,
 } from "./features/hotel";
 import {AdminRatingList, Rating, Ratings} from "./features/rating";
-import {AdminDetailUser, AdminEditUser, AdminUsersList} from "./features/user";
+import {AdminDetailUser, AdminUsersList} from "./features/user";
 
 const App = () => {
   return (
@@ -76,10 +69,6 @@ const App = () => {
               />
               <Route
                 path=":id"
-                element={<RequireAdmin elm={<AdminEditUser />} />}
-              />
-              <Route
-                path="detail/:id"
                 element={<RequireAdmin elm={<AdminDetailUser />} />}
               />
             </Route>
@@ -92,10 +81,6 @@ const App = () => {
                 path=":id"
                 element={<RequireAdmin elm={<AdminEditCategory />} />}
               />
-              <Route
-                path=":new"
-                element={<RequireAdmin elm={<AdminNewCategory />} />}
-              />
             </Route>
             <Route path="admin-hotel">
               <Route
@@ -105,10 +90,6 @@ const App = () => {
               <Route
                 path=":id"
                 element={<RequireAdmin elm={<AdminEditHotel />} />}
-              />
-              <Route
-                path="detail/:id"
-                element={<RequireAdmin elm={<AdminDetailHotel />} />}
               />
               <Route
                 path="new"
@@ -131,14 +112,6 @@ const App = () => {
               <Route
                 path=":id"
                 element={<RequireAdmin elm={<AdminEditBooking />} />}
-              />
-              <Route
-                path="detail/:id"
-                element={<RequireAdmin elm={<AdminDetailBooking />} />}
-              />
-              <Route
-                path="new"
-                element={<RequireAdmin elm={<AdminNewBooking />} />}
               />
             </Route>
           </Route>

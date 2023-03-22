@@ -10,7 +10,13 @@ const getCategories = async (req, res) => {
   }
 };
 
-// incomplete
+const getCategory = async (req, res) => {
+  try {
+    const category = await Category.findById(req.params.id);
+    return res.json(category);
+  } catch (error) {}
+};
+
 const createCategory = async (req, res) => {
   if (!req.roles === "admin") {
     return res
@@ -19,6 +25,9 @@ const createCategory = async (req, res) => {
   }
   try {
     const {name, image} = req.body;
+    if (!name || !image) {
+      return res.status(400).json({message: "Please fill all fields."});
+    }
     const category = await Category.findOne({name});
     if (category)
       return res.status(400).json({message: "This category already created."});
@@ -62,12 +71,12 @@ const updateCategory = async (req, res) => {
     const {name, image} = req.body;
     const category = await Category.findByIdAndUpdate(
       req.params.id,
-      {name: name.toLowerCase(), image},
+      {name, image},
       {new: true}
     );
     if (!category)
       return res.status(400).json({message: "This category does not exists."});
-    return res.status(200).json(category);
+    return res.status(200).json({message: "category updated successful."});
   } catch (error) {
     return res.status(500).json({message: error.message});
   }
@@ -75,6 +84,7 @@ const updateCategory = async (req, res) => {
 
 module.exports = {
   getCategories,
+  getCategory,
   createCategory,
   deleteCategory,
   updateCategory,

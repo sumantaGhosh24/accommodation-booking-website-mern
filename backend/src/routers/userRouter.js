@@ -5,12 +5,12 @@ const verifyJWT = require("../middleware/verifyJWT");
 
 const router = express.Router();
 
+router.get("/users", verifyJWT, userCtrl.getAllUsers);
+
 router.get("/user/:id", verifyJWT, userCtrl.getSingleUser);
 
-// incomplete
-router
-  .route("user/:id")
-  .patch(verifyJWT, userCtrl.updateUser)
-  .delete(verifyJWT, userCtrl.deleteUser);
+router.put("/user/:id", verifyJWT, userCtrl.updateUser);
+
+router.delete("/user/:id", verifyJWT, userCtrl.deleteUser);
 
 module.exports = router;

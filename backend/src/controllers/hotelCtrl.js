@@ -27,13 +27,15 @@ const getHotels = async (req, res) => {
 
 const getHotel = async (req, res) => {
   try {
-    const hotel = await Hotel.findById(req.params.id).populate(
-      "owner",
-      "_id username email mobileNumber image"
-    );
+    const hotel = await Hotel.findById(req.params.id)
+      .populate("owner", "_id username email mobileNumber image")
+      .populate("category");
     if (!hotel)
       return res.status(400).json({message: "This hotel does not exists."});
-    const rating = await Rating.find({hotel: req.params.id});
+    const rating = await Rating.find({hotel: req.params.id}).populate(
+      "user",
+      "username email image"
+    );
     return res.status(200).json({hotel, rating});
   } catch (error) {
     return res.status(500).json({message: error.message});

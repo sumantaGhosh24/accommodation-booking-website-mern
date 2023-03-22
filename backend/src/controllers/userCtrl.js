@@ -10,10 +10,9 @@ const getSingleUser = async (req, res) => {
   }
 };
 
-// incomplete
 const getAllUsers = async (req, res) => {
   try {
-    if (!req.roles === "admin") {
+    if (!req.role === "admin") {
       return res
         .status(400)
         .json({message: "only admin access all user information."});
@@ -30,61 +29,24 @@ const getAllUsers = async (req, res) => {
 
 const updateUser = async (req, res) => {
   try {
-    const {
-      firstName,
-      lastName,
-      username,
-      image,
-      dob,
-      gender,
-      city,
-      state,
-      country,
-      zip,
-      addressline1,
-      addressline2,
-    } = req.body;
-    const errors = [];
-    for (const key in req.body) {
-      if (!req.body[key]) {
-        errors.push(`Please fill ${key} field.`);
-      }
-    }
-    if (errors.length > 0) {
-      return res.status(400).json({message: errors});
-    }
-    const getUsername = await User.findById(req.params.id);
-    if (getUsername.username != username) {
-      const matchUsername = await User.findOne({username});
-      if (matchUsername) {
-        return res
-          .status(400)
-          .json({message: "This username already register, try another one."});
-      }
-    }
-    if (getUsername.username !== req.user) {
+    if (!req.role == "admin") {
       return res
         .status(400)
-        .json({message: "only the user can update his/her profile."});
+        .json({message: "only admin can update user status."});
     }
-    const user = await User.findByIdAndUpdate(req.params.id, {
-      firstName: firstName.toLowerCase(),
-      lastName: lastName.toLowerCase(),
-      username: username.toLowerCase(),
-      image,
-      dob,
-      gender: gender.toLowerCase(),
-      city: city.toLowerCase(),
-      country: country.toLowerCase(),
-      state: state.toLowerCase(),
-      zip,
-      addressline1,
-      addressline2,
-    });
+    const {active, role} = req.body;
+    const user = await User.findByIdAndUpdate(
+      req.params.id,
+      {
+        active,
+        role,
+      },
+      {new: true}
+    );
     if (!user) {
       return res.status(400).json({message: "User does not exists."});
     }
-    return res.json(user);
+    return res.json({message: "user status updated"});
   } catch (error) {
     return res.status(500).json({message: error.message});
   }
@@ -92,7 +54,7 @@ const updateUser = async (req, res) => {
 
 const deleteUser = async (req, res) => {
   try {
-    if (req.roles == "user") {
+    if (!req.role == "admin") {
       return res
         .status(400)
         .json({message: "only admin can delete user account."});

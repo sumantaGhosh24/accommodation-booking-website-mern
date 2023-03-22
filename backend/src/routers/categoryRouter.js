@@ -8,11 +8,11 @@ const router = express.Router();
 router
   .route("/category")
   .get(categoryCtrl.getCategories)
-  // incomplete
   .post(verifyJWT, categoryCtrl.createCategory);
 
 router
   .route("/category/:id")
+  .get(verifyJWT, categoryCtrl.getCategory)
   .delete(verifyJWT, categoryCtrl.deleteCategory)
   .put(verifyJWT, categoryCtrl.updateCategory);
 

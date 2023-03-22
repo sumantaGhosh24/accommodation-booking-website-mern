@@ -26,6 +26,21 @@ const Header = () => {
         <Link to="/dashboard" className="nav-link text-white">
           Dashboard
         </Link>
+        <Link to="/admin-users" className="nav-link text-white">
+          Users
+        </Link>
+        <Link to="/admin-category" className="nav-link text-white">
+          Category
+        </Link>
+        <Link to="/admin-hotel" className="nav-link text-white">
+          Hotel
+        </Link>
+        <Link to="/admin-rating" className="nav-link text-white">
+          Rating
+        </Link>
+        <Link to="/admin-booking" className="nav-link text-white">
+          Booking
+        </Link>
       </>
     );
   }
