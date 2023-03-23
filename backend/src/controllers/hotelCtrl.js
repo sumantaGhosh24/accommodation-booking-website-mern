@@ -2,6 +2,17 @@ const Hotel = require("../models/hotelModel");
 const Rating = require("../models/ratingModel");
 const APIFeatures = require("../lib/index");
 
+const getAllHotels = async (req, res) => {
+  try {
+    const hotels = await Hotel.find()
+      .populate("owner", "_id firstName lastName username email image")
+      .populate("category", "_id name image");
+    return res.json({hotels});
+  } catch (error) {
+    return res.status(500).json({message: error.message});
+  }
+};
+
 const getHotels = async (req, res) => {
   try {
     const features = new APIFeatures(
@@ -42,7 +53,6 @@ const getHotel = async (req, res) => {
   }
 };
 
-// incomplete
 const createHotel = async (req, res) => {
   if (!req.roles === "admin") {
     return res
@@ -63,8 +73,9 @@ const createHotel = async (req, res) => {
       address,
       latitude,
       longitude,
+      state,
     } = req.body;
-    const owner = req.user.id;
+    const owner = req.id;
     const errors = [];
     for (const key in req.body) {
       if (!req.body[key]) {
@@ -88,9 +99,10 @@ const createHotel = async (req, res) => {
       address,
       latitude,
       longitude,
+      state,
     });
     await newHotel.save();
-    return res.status(200).json(newHotel);
+    return res.status(200).json({message: "new hotel created successful."});
   } catch (error) {
     return res.status(500).json({message: error.message});
   }
@@ -107,8 +119,6 @@ const updateHotel = async (req, res) => {
       title,
       description,
       content,
-      images,
-      category,
       price,
       country,
       city,
@@ -116,15 +126,14 @@ const updateHotel = async (req, res) => {
       address,
       latitude,
       longitude,
+      state,
     } = req.body;
     const hotel = await Hotel.findByIdAndUpdate(
       req.params.id,
       {
-        title: title.toLowerCase(),
-        description: description.toLowerCase(),
-        content: content.toLowerCase(),
-        images,
-        category,
+        title,
+        description,
+        content,
         price,
         country,
         city,
@@ -132,12 +141,13 @@ const updateHotel = async (req, res) => {
         address,
         latitude,
         longitude,
+        state,
       },
       {new: true}
     );
     if (!hotel)
       return res.status(400).json({message: "This hotel does not exists."});
-    return res.status(200).json(hotel);
+    return res.status(200).json({message: "hotel update successful."});
   } catch (error) {
     return res.status(500).json({message: error.message});
   }
@@ -160,6 +170,7 @@ const deleteHotel = async (req, res) => {
 };
 
 module.exports = {
+  getAllHotels,
   getHotels,
   createHotel,
   getHotel,

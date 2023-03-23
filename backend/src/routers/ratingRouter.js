@@ -13,8 +13,10 @@ router.put("/rating/:id", verifyJWT, ratingCtrl.updateRating);
 
 router.delete("/rating/:id", verifyJWT, ratingCtrl.deleteRating);
 
+router.get("/ratings", verifyJWT, ratingCtrl.getRatings);
 // incomplete
-router.get("/ratings/:hotel", verifyJWT, ratingCtrl.getRatings);
+
+router.get("/hrating/:hotel", verifyJWT, ratingCtrl.getHotelRatings);
 
 router.post("/rating/:hotel", verifyJWT, ratingCtrl.createRating);
 

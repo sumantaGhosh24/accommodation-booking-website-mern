@@ -13,4 +13,6 @@ router.put("/user/:id", verifyJWT, userCtrl.updateUser);
 
 router.delete("/user/:id", verifyJWT, userCtrl.deleteUser);
 
+router.get("/dashboard", verifyJWT, userCtrl.getDashboard);
+
 module.exports = router;

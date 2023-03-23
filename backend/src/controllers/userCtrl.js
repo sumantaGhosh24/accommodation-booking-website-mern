@@ -1,4 +1,5 @@
 const User = require("../models/userModel");
+const Booking = require("../models/bookingModel");
 
 const getSingleUser = async (req, res) => {
   try {
@@ -67,9 +68,34 @@ const deleteUser = async (req, res) => {
   }
 };
 
+const getDashboard = async (req, res) => {
+  try {
+    if (!req.role == "admin") {
+      return res
+        .status(400)
+        .json({message: "only admin can get dashboard details."});
+    }
+    const bookingCount = await Booking.estimatedDocumentCount();
+    const categoryCount = await Category.estimatedDocumentCount();
+    const hotelCount = await Hotel.estimatedDocumentCount();
+    const ratingCount = await Rating.estimatedDocumentCount();
+    const userCount = await User.estimatedDocumentCount();
+    return res.json({
+      bookingCount,
+      categoryCount,
+      hotelCount,
+      ratingCount,
+      userCount,
+    });
+  } catch (error) {
+    return res.status(500).json({message: error.message});
+  }
+};
+
 module.exports = {
   getAllUsers,
   getSingleUser,
   updateUser,
   deleteUser,
+  getDashboard,
 };

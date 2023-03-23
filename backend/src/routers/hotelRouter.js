@@ -5,11 +5,12 @@ const verifyJWT = require("../middleware/verifyJWT");
 
 const router = express.Router();
 
+router.get("/all-hotels", hotelCtrl.getAllHotels);
+
 router.get("/hotels", hotelCtrl.getHotels);
 
 router.get("/hotel/:id", hotelCtrl.getHotel);
 
-// incomplete
 router.post("/hotel", verifyJWT, hotelCtrl.createHotel);
 
 router

@@ -13,6 +13,18 @@ const getUserRatings = async (req, res) => {
   }
 };
 
+const getHotelRatings = async (req, res) => {
+  try {
+    const ratings = await Rating.find({hotel: req.params.hotel}).populate(
+      "user"
+    );
+    if (!ratings) return res.status(400).json({message: "No review exists."});
+    return res.status(200).json({ratings});
+  } catch (error) {
+    return res.status(500).json({message: error.message});
+  }
+};
+
 const getSingleRating = async (req, res) => {
   try {
     const rating = await Rating.findById(req.params.id).populate(
@@ -54,13 +66,11 @@ const deleteRating = async (req, res) => {
   }
 };
 
-// incomplete
 const getRatings = async (req, res) => {
   try {
-    const ratings = await Rating.find({hotel: req.params.hotel}).populate(
-      "user",
-      "username email image"
-    );
+    const ratings = await Rating.find()
+      .populate("user", "username email")
+      .populate("hotel", "title _id");
     if (!ratings) return res.status(400).json({message: "No review exists."});
     return res.status(200).json(ratings);
   } catch (error) {
@@ -95,6 +105,7 @@ const createRating = async (req, res) => {
 
 module.exports = {
   getRatings,
+  getHotelRatings,
   getUserRatings,
   createRating,
   getSingleRating,

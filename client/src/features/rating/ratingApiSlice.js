@@ -2,6 +2,11 @@ import {apiSlice} from "../../app/api/apiSlice";
 
 export const ratingApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
+    getAllRatings: builder.query({
+      query: () => "/ratings",
+      transformResponse: (response) => response,
+      providesTags: (result, error, id) => [{type: "Rating", id: "LIST"}],
+    }),
     getUserRatings: builder.query({
       query: (user) => `/ratings/${user}`,
       transformResponse: (response) => response,
@@ -37,4 +42,5 @@ export const {
   useGetSingleRatingQuery,
   useUpdateRatingMutation,
   useDeleteRatingMutation,
+  useGetAllRatingsQuery,
 } = ratingApiSlice;
