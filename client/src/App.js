@@ -37,9 +37,9 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route path="login" element={<RequireGuest elm={<Login />} />} />
-        <Route index element={<RequireGuest elm={<Public />} />} />
-        <Route path="register" element={<RequireGuest elm={<Register />} />} />
+        <Route path="login" element={<Login />} />
+        <Route index element={<Public />} />
+        <Route path="register" element={<Register />} />
         <Route element={<PersistLogin />}>
           <Route element={<AuthLayout />}>
             {/* user routes */}
@@ -106,7 +106,7 @@ const App = () => {
                 element={<RequireAdmin elm={<AdminBookingList />} />}
               />
               <Route
-                path=":hotel"
+                path="hotel/:hotel"
                 element={<RequireAdmin elm={<AdminHotelBooking />} />}
               />
               <Route

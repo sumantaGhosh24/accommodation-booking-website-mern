@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {Button, Col, Container, Form, Row} from "react-bootstrap";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
 import CircleLoader from "react-spinners/CircleLoader";
 import {ToastContainer, toast} from "react-toastify";

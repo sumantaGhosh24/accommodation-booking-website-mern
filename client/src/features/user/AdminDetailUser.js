@@ -35,9 +35,9 @@ const AdminDetailUser = () => {
         role,
       }).unwrap();
       toast.success(message);
-      // setTimeout(() => {
-      //   navigate(`/admin-users/${id}`);
-      // }, 1000);
+      setTimeout(() => {
+        navigate(`/admin-users/${id}`);
+      }, 1000);
     } catch (error) {
       toast.error(error?.data?.message);
     }

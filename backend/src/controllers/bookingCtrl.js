@@ -14,7 +14,6 @@ const getUserBooking = async (req, res) => {
   }
 };
 
-// incomplete
 const getBookings = async (req, res) => {
   if (!req.roles === "admin") {
     return res
@@ -24,26 +23,8 @@ const getBookings = async (req, res) => {
   try {
     const bookings = await Booking.find()
       .populate("user", "_id username email mobileNumber image")
-      .populate("hotel");
+      .populate("hotel", "title _id");
     return res.json(bookings);
-  } catch (error) {
-    return res.status(500).json({msg: error.message});
-  }
-};
-
-const createBooking = async (req, res) => {
-  try {
-    const {user, hotel, price, startDate, endDate, paymentResult} = req.body;
-    const newBooking = new Booking({
-      user,
-      hotel,
-      price,
-      startDate,
-      endDate,
-      paymentResult,
-    });
-    await newBooking.save();
-    return res.json({msg: "Booking confirmed."});
   } catch (error) {
     return res.status(500).json({msg: error.message});
   }
@@ -77,7 +58,7 @@ const updateBooking = async (req, res) => {
     );
     if (!booking)
       return res.status(400).json({msg: "Booking does not exists."});
-    return res.status(400).json(booking);
+    return res.status(200).json({message: "booking updated successful."});
   } catch (error) {
     return res.status(500).json({msg: error.message});
   }
@@ -106,7 +87,7 @@ const getHotelBooking = async (req, res) => {
   try {
     const booking = await Booking.find({hotel: req.params.hotel})
       .populate("user", "_id username email mobileNumber image")
-      .populate("hotel");
+      .populate("hotel", "title");
     if (!booking)
       return res.status(400).json({msg: "This booking does not exists."});
     return res.json(booking);
@@ -117,7 +98,6 @@ const getHotelBooking = async (req, res) => {
 
 module.exports = {
   getBookings,
-  createBooking,
   getBooking,
   updateBooking,
   deleteBooking,

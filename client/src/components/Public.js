@@ -2,8 +2,8 @@ import {Card, Col, Container, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import CircleLoader from "react-spinners/CircleLoader";
 import {ToastContainer, toast} from "react-toastify";
-import {useGetHotelsQuery} from "../features/hotel/hotelApiSlice";
 
+import {useGetHotelsQuery} from "../features/hotel/hotelApiSlice";
 import useTitle from "../hooks/useTitle";
 import PublicHeader from "./PublicHeader";
 

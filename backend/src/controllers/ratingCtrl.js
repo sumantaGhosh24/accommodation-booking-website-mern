@@ -13,18 +13,6 @@ const getUserRatings = async (req, res) => {
   }
 };
 
-const getHotelRatings = async (req, res) => {
-  try {
-    const ratings = await Rating.find({hotel: req.params.hotel}).populate(
-      "user"
-    );
-    if (!ratings) return res.status(400).json({message: "No review exists."});
-    return res.status(200).json({ratings});
-  } catch (error) {
-    return res.status(500).json({message: error.message});
-  }
-};
-
 const getSingleRating = async (req, res) => {
   try {
     const rating = await Rating.findById(req.params.id).populate(
@@ -82,7 +70,7 @@ const createRating = async (req, res) => {
   try {
     const {comment, rating} = req.body;
     const hotel = req.params.hotel;
-    const user = req.user.id;
+    const user = req.id;
     const errors = [];
     for (const key in req.body) {
       if (!req.body[key]) {
@@ -97,7 +85,7 @@ const createRating = async (req, res) => {
       rating: Number(rating),
     });
     await newRating.save();
-    return res.status(200).json(newRating);
+    return res.status(200).json({message: "rating created successful"});
   } catch (error) {
     return res.status(500).json({message: error.message});
   }
@@ -105,7 +93,6 @@ const createRating = async (req, res) => {
 
 module.exports = {
   getRatings,
-  getHotelRatings,
   getUserRatings,
   createRating,
   getSingleRating,

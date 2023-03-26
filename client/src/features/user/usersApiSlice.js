@@ -7,6 +7,10 @@ export const usersApiSlice = apiSlice.injectEndpoints({
       transformResponse: (response) => response,
       providesTags: (result, error, id) => [{type: "User", id}],
     }),
+    getDashboard: builder.query({
+      query: () => "/dashboard",
+      transformResponse: (response) => response,
+    }),
     getAllUser: builder.query({
       query: () => "/users",
       transformResponse: (response) => response,
@@ -35,4 +39,5 @@ export const {
   useGetAllUserQuery,
   useUpdateUserMutation,
   useDeleteUserMutation,
+  useGetDashboardQuery,
 } = usersApiSlice;

@@ -34,6 +34,14 @@ export const ratingApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: (result, error, id) => [{type: "Rating", id}],
     }),
+    createRating: builder.mutation({
+      query: (credentials) => ({
+        url: `/hrating/${credentials.id}`,
+        method: "POST",
+        body: {...credentials},
+      }),
+      invalidatesTags: (result, error, id) => [{type: "Rating", id: "LIST"}],
+    }),
   }),
 });
 
@@ -43,4 +51,5 @@ export const {
   useUpdateRatingMutation,
   useDeleteRatingMutation,
   useGetAllRatingsQuery,
+  useCreateRatingMutation,
 } = ratingApiSlice;

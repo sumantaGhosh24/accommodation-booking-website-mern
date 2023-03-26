@@ -1,5 +1,8 @@
-const User = require("../models/userModel");
 const Booking = require("../models/bookingModel");
+const Category = require("../models/categoryModel");
+const Hotel = require("../models/hotelModel");
+const Rating = require("../models/ratingModel");
+const User = require("../models/userModel");
 
 const getSingleUser = async (req, res) => {
   try {

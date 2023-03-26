@@ -2,11 +2,11 @@ import jwtDecode from "jwt-decode";
 import React, {useEffect} from "react";
 import {Container, Nav, Navbar} from "react-bootstrap";
 import {useSelector} from "react-redux";
-import {Link, Navigate, useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import CircleLoader from "react-spinners/CircleLoader";
 import {toast, ToastContainer} from "react-toastify";
-import {useSendLogoutMutation} from "../features/auth/authApiSlice";
 
+import {useSendLogoutMutation} from "../features/auth/authApiSlice";
 import {selectCurrentToken} from "../features/auth/authSlice";
 
 const Header = () => {

@@ -1,10 +1,21 @@
 import React from "react";
+import {Badge, Col, Container, Row, Table} from "react-bootstrap";
+import {Link, useParams} from "react-router-dom";
+import CircleLoader from "react-spinners/CircleLoader";
+
+import useTitle from "../../hooks/useTitle";
+import {useGetHotelBookingsQuery} from "./bookingApiSlice";
 
 const AdminHotelBooking = () => {
-  // show all hotel booking
+  useTitle("Hotel Bookings");
+
+  const {hotel} = useParams();
+
+  const {data: bookings, isLoading} = useGetHotelBookingsQuery(hotel);
+
   return (
     <>
-      {/* <Container className="my-5">
+      <Container className="my-5">
         <Row>
           <Col>
             {isLoading && (
@@ -19,84 +30,63 @@ const AdminHotelBooking = () => {
                 <CircleLoader color="#0D6EFD" size={480} />
               </div>
             )}
-            {users?.length === 0 ? (
+            {bookings?.length === 0 ? (
               <h2 className="text-center fw-bold mt-5">
-                you have not any users yet.
+                you have not any bookings yet.
               </h2>
             ) : (
               <Container className="my-5">
-                <h2 className="mb-4 fw-bold">All Users</h2>
+                <h2 className="mb-4 fw-bold">All Bookings</h2>
                 <Row>
                   <Col>
                     <Table striped bordered hover size="sm">
                       <thead>
                         <tr>
                           <th>Id</th>
-                          <th>First Name</th>
-                          <th>Last Name</th>
-                          <th>Username</th>
-                          <th>Email</th>
-                          <th>Mobile Number</th>
-                          <th>DOB</th>
-                          <th>Gender</th>
-                          <th>Image</th>
-                          <th>Zip</th>
-                          <th>City</th>
-                          <th>State</th>
-                          <th>Country</th>
-                          <th>Address Line 1</th>
-                          <th>Address Line 2</th>
-                          <th>Active</th>
-                          <th>Role</th>
+                          <th>User</th>
+                          <th>Hotel</th>
+                          <th>Price</th>
+                          <th>Is Paid</th>
+                          <th>Payment Result</th>
+                          <th>Start Date</th>
+                          <th>End Date</th>
+                          <th>Status</th>
                           <th>Created At</th>
                           <th>Updated At</th>
-                          <th>Action</th>
+                          <th>Actions</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {users?.map((user) => (
-                          <tr key={user._id}>
-                            <td>{user._id}</td>
-                            <td>{user.firstName}</td>
-                            <td>{user.lastName}</td>
-                            <td>{user.username}</td>
-                            <td>{user.email}</td>
-                            <td>{user.mobileNumber}</td>
-                            <td>{user.dob}</td>
-                            <td>{user.gender}</td>
+                        {bookings?.map((booking) => (
+                          <tr key={booking._id}>
+                            <td>{booking._id}</td>
                             <td>
-                              <img
-                                src={user.image}
-                                alt={user.username}
-                                style={{
-                                  height: "50px",
-                                  width: "50px",
-                                  borderRadius: "50px",
-                                }}
-                              />
+                              {booking?.user?.email} ||{" "}
+                              {booking?.user?.mobileNumber} ||{" "}
+                              {booking?.user?.username} ||{" "}
+                              {booking?.user?.image}
                             </td>
-                            <td>{user.zip}</td>
-                            <td>{user.city}</td>
-                            <td>{user.state}</td>
-                            <td>{user.country}</td>
-                            <td>{user.addressline1}</td>
-                            <td>{user.addressline2}</td>
+                            <td>{booking?.hotel?.title}</td>
+                            <td>{booking.price}</td>
                             <td>
-                              {user.active === "active" ? (
-                                <Badge bg="success">Active</Badge>
+                              {booking.isPaid ? (
+                                <Badge bg="success">Paid</Badge>
                               ) : (
-                                <Badge bg="danger">Inactive</Badge>
+                                <Badge bg="danger">Not Paid</Badge>
                               )}
                             </td>
-                            <td>{user.role}</td>
-                            <td>{user.createdAt}</td>
-                            <td>{user.updatedAt}</td>
+                            <td>{booking?.paymentResult?.status}</td>
+                            <td>{booking.startDate}</td>
+                            <td>{booking.endDate}</td>
+                            <td>{booking.status}</td>
+                            <td>{booking.createdAt}</td>
+                            <td>{booking.updatedAt}</td>
                             <td>
                               <Link
-                                className="btn btn-primary"
-                                to={`/admin-users/${user._id}`}
+                                to={`/admin-booking/${booking._id}`}
+                                className="btn btn-primary btn-lg"
                               >
-                                Manage User
+                                Manage Booking
                               </Link>
                             </td>
                           </tr>
@@ -109,7 +99,7 @@ const AdminHotelBooking = () => {
             )}
           </Col>
         </Row>
-      </Container> */}
+      </Container>
     </>
   );
 };

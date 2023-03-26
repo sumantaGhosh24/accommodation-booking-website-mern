@@ -9,6 +9,7 @@ logs
 
 data
 seed.js
+config.js
 
 # testing
 /coverage

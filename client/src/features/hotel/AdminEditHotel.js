@@ -29,6 +29,7 @@ const AdminEditHotel = () => {
     latitude: "",
     longitude: "",
     state: "",
+    id,
   });
 
   const {data: hotel, isLoading} = useGetHotelQuery(id);
@@ -45,10 +46,7 @@ const AdminEditHotel = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      const {message} = await updateHotel({
-        id,
-        ...data,
-      }).unwrap();
+      const {message} = await updateHotel(data).unwrap();
       toast.success(message);
       setTimeout(() => {
         navigate(`/admin-hotel/${id}`);

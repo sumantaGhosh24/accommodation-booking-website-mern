@@ -31,9 +31,9 @@ const AdminEditCategory = () => {
     try {
       const {message} = await updateCategory({id, name}).unwrap();
       toast.success(message);
-      // setTimeout(() => {
-      //   navigate(`/admin-category/${id}`)
-      // }, 1000)
+      setTimeout(() => {
+        navigate(`/admin-category/${id}`);
+      }, 1000);
     } catch (error) {
       toast.error(error?.data?.message);
     }
@@ -89,7 +89,7 @@ const AdminEditCategory = () => {
             )}
             <Card className="mb-5">
               <Card.Img
-                // src={category?.image}
+                src={category?.image}
                 alt={category?.name}
                 style={{height: "250px"}}
               />

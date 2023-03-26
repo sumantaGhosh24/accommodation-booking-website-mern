@@ -14,10 +14,7 @@ router.put("/rating/:id", verifyJWT, ratingCtrl.updateRating);
 router.delete("/rating/:id", verifyJWT, ratingCtrl.deleteRating);
 
 router.get("/ratings", verifyJWT, ratingCtrl.getRatings);
-// incomplete
 
-router.get("/hrating/:hotel", verifyJWT, ratingCtrl.getHotelRatings);
-
-router.post("/rating/:hotel", verifyJWT, ratingCtrl.createRating);
+router.post("/hrating/:hotel", verifyJWT, ratingCtrl.createRating);
 
 module.exports = router;

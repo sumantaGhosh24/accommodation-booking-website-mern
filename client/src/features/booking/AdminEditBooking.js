@@ -1,10 +1,45 @@
-import React from "react";
+import React, {useState} from "react";
+import {Badge, Button, Card, Col, Container, Form, Row} from "react-bootstrap";
+import {useNavigate, useParams} from "react-router-dom";
+import CircleLoader from "react-spinners/CircleLoader";
+import {toast, ToastContainer} from "react-toastify";
+
+import useTitle from "../../hooks/useTitle";
+import {
+  useGetSingleBookingQuery,
+  useUpdateBookingMutation,
+} from "./bookingApiSlice";
 
 const AdminEditBooking = () => {
-  // edit any booking
+  useTitle("Booking Details");
+
+  const {id} = useParams();
+  const navigate = useNavigate();
+
+  const [isPaid, setIsPaid] = useState(null);
+  const [status, setStatus] = useState("");
+
+  const {data: booking, isLoading} = useGetSingleBookingQuery(id);
+
+  const [updateBooking, {isLoading: updateLoading}] =
+    useUpdateBookingMutation();
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    try {
+      const {message} = await updateBooking({id, isPaid, status}).unwrap();
+      toast.success(message);
+      setTimeout(() => {
+        navigate(`/admin-booking/${id}`);
+      }, 1000);
+    } catch (error) {
+      toast.error(error?.data?.message);
+    }
+  };
+
   return (
     <>
-      {/* <ToastContainer />
+      <ToastContainer />
       <Container className="my-5">
         <Row>
           <Col>
@@ -32,93 +67,54 @@ const AdminEditBooking = () => {
                 <CircleLoader color="#0D6EFD" size={480} />
               </div>
             )}
-            {!user && (
+            {!booking && (
               <h2 className="text-center fw-bold mt-5">
                 Something went wrong, please try again later.
               </h2>
             )}
             <Card className="mb-5">
-              <Card.Img
-                src={user?.image}
-                alt={user?.username}
-                style={{height: "250px"}}
-              />
               <Card.Body>
                 <Card.Text className="mb-3" style={{fontSize: "20px"}}>
-                  <span className="fw-bold">First Name: </span>
-                  {user?.firstName}
+                  <span className="fw-bold">Booking User: </span>
+                  {booking?.user?.email} || {booking?.user?.mobileNumber} ||{" "}
+                  {booking?.user?.username} || {booking?.user?.image}
                 </Card.Text>
                 <Card.Text className="mb-3" style={{fontSize: "20px"}}>
-                  <span className="fw-bold">Last Name: </span>
-                  {user?.lastName}
+                  <span className="fw-bold">Booking Hotel: </span>
+                  {booking?.hotel?.title}
                 </Card.Text>
                 <Card.Text className="mb-3" style={{fontSize: "20px"}}>
-                  <span className="fw-bold">Username: </span>
-                  {user?.username}
+                  <span className="fw-bold">Price: </span>
+                  {booking?.price}
                 </Card.Text>
                 <Card.Text className="mb-3" style={{fontSize: "20px"}}>
-                  <span className="fw-bold">Email: </span>
-                  {user?.email}
-                </Card.Text>
-                <Card.Text className="mb-3" style={{fontSize: "20px"}}>
-                  <span className="fw-bold">Mobile Number: </span>
-                  {user?.mobileNumber}
-                </Card.Text>
-                <Card.Text className="mb-3" style={{fontSize: "20px"}}>
-                  <span className="fw-bold">City: </span>
-                  {user?.city}
-                </Card.Text>
-                <Card.Text className="mb-3" style={{fontSize: "20px"}}>
-                  <span className="fw-bold">State: </span>
-                  {user?.state}
-                </Card.Text>
-                <Card.Text className="mb-3" style={{fontSize: "20px"}}>
-                  <span className="fw-bold">Country: </span>
-                  {user?.country}
-                </Card.Text>
-                <Card.Text className="mb-3" style={{fontSize: "20px"}}>
-                  <span className="fw-bold">Zip: </span>
-                  {user?.zip}
-                </Card.Text>
-                <Card.Text className="mb-3" style={{fontSize: "20px"}}>
-                  <span className="fw-bold">Address Line 1: </span>
-                  {user?.addressline1}
-                </Card.Text>
-                <Card.Text className="mb-3" style={{fontSize: "20px"}}>
-                  <span className="fw-bold">Address Line 2: </span>
-                  {user?.addressline2}
-                </Card.Text>
-                <Card.Text className="mb-3" style={{fontSize: "20px"}}>
-                  <span className="fw-bold">Created At: </span>
-                  {user?.createdAt}
-                </Card.Text>
-                <Card.Text className="mb-3" style={{fontSize: "20px"}}>
-                  <span className="fw-bold">DOB: </span>
-                  {user?.dob}
-                </Card.Text>
-                <Card.Text className="mb-3" style={{fontSize: "20px"}}>
-                  <span className="fw-bold">Gender: </span>
-                  {user?.gender}
-                </Card.Text>
-                <Card.Text className="mb-3" style={{fontSize: "20px"}}>
-                  <span className="fw-bold">Active: </span>
-                  {user?.active === "active" ? (
-                    <Badge bg="success" className="p-2">
-                      Active
-                    </Badge>
+                  <span className="fw-bold">Paid: </span>
+                  {booking?.isPaid ? (
+                    <Badge bg="success">Paid</Badge>
                   ) : (
-                    <Badge bg="danger" className="p-2">
-                      Inactive
-                    </Badge>
+                    <Badge bg="danger">Not Paid</Badge>
                   )}
                 </Card.Text>
                 <Card.Text className="mb-3" style={{fontSize: "20px"}}>
-                  <span className="fw-bold">Role: </span>
-                  {user?.role}
+                  <span className="fw-bold">Payment Status: </span>
+                  {booking?.paymentResult?.status}
                 </Card.Text>
-                <Button variant="danger" size="lg" onClick={handleDelete}>
-                  Delete
-                </Button>
+                <Card.Text className="mb-3" style={{fontSize: "20px"}}>
+                  <span className="fw-bold">Start Date: </span>
+                  {booking?.startDate}
+                </Card.Text>
+                <Card.Text className="mb-3" style={{fontSize: "20px"}}>
+                  <span className="fw-bold">End Date: </span>
+                  {booking?.endDate}
+                </Card.Text>
+                <Card.Text className="mb-3" style={{fontSize: "20px"}}>
+                  <span className="fw-bold">Status: </span>
+                  {booking?.status}
+                </Card.Text>
+                <Card.Text className="mb-3" style={{fontSize: "20px"}}>
+                  <span className="fw-bold">Updated At: </span>
+                  {booking?.updatedAt}
+                </Card.Text>
               </Card.Body>
             </Card>
             <Form
@@ -130,23 +126,26 @@ const AdminEditBooking = () => {
               }}
             >
               <Form.Group className="mb-3">
-                <Form.Label>Active</Form.Label>
+                <Form.Label>Is Paid</Form.Label>
                 <Form.Select
                   name="active"
-                  onChange={(e) => setActive(e.target.value)}
+                  onChange={(e) => setIsPaid(e.target.value)}
                 >
-                  <option value="active">Active</option>
-                  <option value="inactive">Inactive</option>
+                  <option value={true}>Paid</option>
+                  <option value={false}>Not Paid</option>
                 </Form.Select>
               </Form.Group>
               <Form.Group className="mb-3">
-                <Form.Label>Role</Form.Label>
+                <Form.Label>Status</Form.Label>
                 <Form.Select
                   name="role"
-                  onChange={(e) => setRole(e.target.value)}
+                  onChange={(e) => setStatus(e.target.value)}
                 >
-                  <option value="user">User</option>
-                  <option value="admin">Admin</option>
+                  <option value="success">Success</option>
+                  <option value="error">Error</option>
+                  <option value="fail">Fail</option>
+                  <option value="pending">Pending</option>
+                  <option value="cancel">Cancel</option>
                 </Form.Select>
               </Form.Group>
               <Button variant="warning" size="lg" type="submit">
@@ -155,7 +154,7 @@ const AdminEditBooking = () => {
             </Form>
           </Col>
         </Row>
-      </Container> */}
+      </Container>
     </>
   );
 };

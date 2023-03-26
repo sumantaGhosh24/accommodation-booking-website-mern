@@ -1,11 +1,11 @@
-import React, {useState} from "react";
-import {Button, Container, Form, Row} from "react-bootstrap";
+import React from "react";
+import {Container, Form, Row} from "react-bootstrap";
 import CircleLoader from "react-spinners/CircleLoader";
 import {toast, ToastContainer} from "react-toastify";
-import {HotelCard} from "../../components";
 
+import {HotelCard} from "../../components";
 import useTitle from "../../hooks/useTitle";
-import {useGetHotelsQuery, useGetHotelsSearchQuery} from "./hotelApiSlice";
+import {useGetHotelsQuery} from "./hotelApiSlice";
 import SearchHotel from "./SearchHotel";
 
 const Hotels = () => {

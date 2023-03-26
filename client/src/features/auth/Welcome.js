@@ -1,7 +1,7 @@
 import {Container, Row, ToastContainer} from "react-bootstrap";
 import CircleLoader from "react-spinners/CircleLoader";
 import {toast} from "react-toastify";
-import {HotelCard, PublicHeader} from "../../components";
+import {HotelCard} from "../../components";
 import useTitle from "../../hooks/useTitle";
 import {useGetHotelsQuery} from "../hotel/hotelApiSlice";
 

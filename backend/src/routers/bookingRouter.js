@@ -13,10 +13,7 @@ router
   .put(verifyJWT, bookingCtrl.updateBooking)
   .delete(verifyJWT, bookingCtrl.deleteBooking);
 
-// incomplete
 router.get("/bookings", verifyJWT, bookingCtrl.getBookings);
-
-router.post("/booking", verifyJWT, bookingCtrl.createBooking);
 
 router.get("/hotel-booking/:hotel", verifyJWT, bookingCtrl.getHotelBooking);
 

@@ -1,5 +1,5 @@
+import React from "react";
 import jwtDecode from "jwt-decode";
-import React, {useState} from "react";
 import {Col, Container, Row} from "react-bootstrap";
 import {useSelector} from "react-redux";
 import CircleLoader from "react-spinners/CircleLoader";

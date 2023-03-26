@@ -7,10 +7,8 @@ const router = express.Router();
 
 router.use(verifyJWT);
 
-router.get("/logo.svg", paymentCtrl.logo);
+router.post("/orders", paymentCtrl.createOrder);
 
-router.post("/verification", paymentCtrl.verification);
-
-router.post("/razorpay", paymentCtrl.razor);
+router.post("/success", paymentCtrl.paymentVerification);
 
 module.exports = router;
