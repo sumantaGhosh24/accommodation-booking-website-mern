@@ -1,11 +1,11 @@
 {
   "name": "accommodation-booking-app-api-men",
   "version": "1.0.0",
-  "description": "",
-  "main": "src/server.js",
+  "description": "accommodation-booking-app-mern clone backend api",
+  "main": "server.js",
   "scripts": {
-    "start": "node src/server.js",
-    "dev": "nodemon src/server.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
@@ -14,14 +14,15 @@
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
-    "date-fns": "^2.29.3",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-async-errors": "^3.1.1",
     "express-rate-limit": "^6.7.0",
+    "helmet": "^6.1.5",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.9.0",
     "mongoose-sequence": "^5.3.1",
+    "morgan": "^1.10.0",
     "razorpay": "^2.8.4",
     "shortid": "^2.2.16",
     "uuid": "^9.0.0"
