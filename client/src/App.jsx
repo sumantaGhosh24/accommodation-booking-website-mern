@@ -1,4 +1,3 @@
-import React from "react";
 import {Routes, Route} from "react-router-dom";
 import {ToastContainer} from "react-toastify";
 
@@ -37,10 +36,10 @@ const App = () => {
       <ToastContainer />
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Public />} />
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
           <Route element={<PersistLogin />}>
+            <Route index element={<Public />} />
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
             <Route element={<AuthLayout />}>
               {/* user routes */}
               <Route

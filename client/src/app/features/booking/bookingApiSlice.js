@@ -17,7 +17,7 @@ export const bookingApiSlice = apiSlice.injectEndpoints({
         });
         return bookingAdapter.setAll(initialState, loadedBooking);
       },
-      providesTags: (result, error, arg) => {
+      providesTags: (result) => {
         if (result?.ids) {
           return [
             {type: "Booking", id: "LIST"},
@@ -35,7 +35,7 @@ export const bookingApiSlice = apiSlice.injectEndpoints({
         });
         return bookingAdapter.setAll(initialState, loadedBooking);
       },
-      providesTags: (result, error, arg) => {
+      providesTags: (result) => {
         if (result?.ids) {
           return [
             {type: "Booking", id: "LIST"},
@@ -53,7 +53,7 @@ export const bookingApiSlice = apiSlice.injectEndpoints({
         });
         return bookingAdapter.setAll(initialState, loadedBooking);
       },
-      providesTags: (result, error, arg) => {
+      providesTags: (result) => {
         if (result?.ids) {
           return [
             {type: "Booking", id: "LIST"},

@@ -1,4 +1,3 @@
-import React from "react";
 import {Card, Col, Container, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
 
@@ -23,7 +22,7 @@ const Dashboard = () => {
                 <Card.Subtitle className="mb-2 text-muted">
                   {data?.bookingCount}
                 </Card.Subtitle>
-                <Link href="/admin-booking">Read More</Link>
+                <Link to="/admin-booking">Read More</Link>
               </Card.Body>
             </Card>
           </Col>
@@ -34,7 +33,7 @@ const Dashboard = () => {
                 <Card.Subtitle className="mb-2 text-muted">
                   {data?.categoryCount}
                 </Card.Subtitle>
-                <Link href="/admin-category">Read More</Link>
+                <Link to="/admin-category">Read More</Link>
               </Card.Body>
             </Card>
           </Col>
@@ -45,7 +44,7 @@ const Dashboard = () => {
                 <Card.Subtitle className="mb-2 text-muted">
                   {data?.hotelCount}
                 </Card.Subtitle>
-                <Link href="/admin-hotel">Read More</Link>
+                <Link to="/admin-hotel">Read More</Link>
               </Card.Body>
             </Card>
           </Col>
@@ -56,7 +55,7 @@ const Dashboard = () => {
                 <Card.Subtitle className="mb-2 text-muted">
                   {data?.ratingCount}
                 </Card.Subtitle>
-                <Link href="/admin-rating">Read More</Link>
+                <Link to="/admin-rating">Read More</Link>
               </Card.Body>
             </Card>
           </Col>
@@ -67,7 +66,7 @@ const Dashboard = () => {
                 <Card.Subtitle className="mb-2 text-muted">
                   {data?.userCount}
                 </Card.Subtitle>
-                <Link href="/admin-users">Read More</Link>
+                <Link to="/admin-users">Read More</Link>
               </Card.Body>
             </Card>
           </Col>

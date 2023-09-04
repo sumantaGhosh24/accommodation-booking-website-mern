@@ -20,7 +20,7 @@ export const hotelApiSlice = apiSlice.injectEndpoints({
         });
         return hotelAdapter.setAll(initialState, loadedHotel);
       },
-      providesTags: (result, error, arg) => {
+      providesTags: (result) => {
         if (result?.ids) {
           return [
             {type: "Hotel", id: "LIST"},
@@ -38,7 +38,7 @@ export const hotelApiSlice = apiSlice.injectEndpoints({
         });
         return hotelAdapter.setAll(initialState, loadedHotel);
       },
-      providesTags: (result, error, arg) => {
+      providesTags: (result) => {
         if (result?.ids) {
           return [
             {type: "Hotel", id: "LIST"},

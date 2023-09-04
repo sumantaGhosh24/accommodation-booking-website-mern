@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {Button, Card, Col, Container, Form, Image, Row} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
+import propTypes from "prop-types";
 
 import {
   useDeleteHotelMutation,
@@ -58,9 +59,9 @@ const EditHotelForm = ({hotel}) => {
     e.preventDefault();
     try {
       const {message} = await updateHotel(data).unwrap();
-      toast.success(message);
+      toast.success(message, {toastId: "hotel-success"});
     } catch (error) {
-      toast.error(error?.data?.message);
+      toast.error(error?.data?.message, {toastId: "hotel-error"});
     }
   };
 
@@ -68,9 +69,9 @@ const EditHotelForm = ({hotel}) => {
     e.preventDefault();
     try {
       const {message} = await deleteHotel({id: hotel.id}).unwrap();
-      toast.success(message);
+      toast.success(message, {toastId: "hotel-success"});
     } catch (error) {
-      toast.error(error?.data?.message);
+      toast.error(error?.data?.message, {toastId: "hotel-error"});
     }
   };
 
@@ -300,6 +301,10 @@ const EditHotelForm = ({hotel}) => {
       </Container>
     </>
   );
+};
+
+EditHotelForm.propTypes = {
+  hotel: propTypes.object,
 };
 
 export default EditHotelForm;

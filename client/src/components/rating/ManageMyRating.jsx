@@ -1,4 +1,5 @@
 import {Link} from "react-router-dom";
+import propTypes from "prop-types";
 
 import {useGetMyRatingsQuery} from "../../app/features/rating/ratingApiSlice";
 
@@ -26,6 +27,11 @@ const ManageMyRating = ({ratingId, ind}) => {
       </tr>
     );
   } else return null;
+};
+
+ManageMyRating.propTypes = {
+  ratingId: propTypes.string,
+  ind: propTypes.number,
 };
 
 export default ManageMyRating;

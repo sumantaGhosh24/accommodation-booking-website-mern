@@ -37,13 +37,13 @@ const MyBookings = () => {
     const {ids} = booking;
     const tableContent =
       ids?.length &&
-      ids.map((bookingId, i) => (
+      ids.map((bookingId) => (
         <ManageMyBooking key={bookingId} bookingId={bookingId} />
       ));
 
     content = (
       <Row>
-        <Col>
+        <Col style={{overflowX: "scroll"}}>
           <Table striped bordered hover size="sm">
             <thead>
               <tr>

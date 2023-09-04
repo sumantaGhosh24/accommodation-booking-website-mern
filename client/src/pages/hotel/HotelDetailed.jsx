@@ -1,7 +1,6 @@
 import {useState} from "react";
 import {Badge, Button, Card, Col, Container, Form, Row} from "react-bootstrap";
 import {useParams} from "react-router-dom";
-import {toast} from "react-toastify";
 
 import {useTitle} from "../../hooks";
 import {useGetHotelsQuery} from "../../app/features/hotel/hotelApiSlice";
@@ -23,10 +22,6 @@ const HotelDetailed = () => {
     }),
   });
 
-  if (!hotel) {
-    return <Loading />;
-  }
-
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
@@ -35,41 +30,45 @@ const HotelDetailed = () => {
   const [verification] = useVerificationMutation();
 
   const checkoutHandler = async (price) => {
-    const result = await getRazorpay({price}).unwrap();
+    try {
+      const result = await getRazorpay({price}).unwrap();
 
-    if (!result) {
-      alert("something went wrong please try again later.");
-      return;
+      const {amount, id: order_id, currency} = result;
+
+      const options = {
+        key: RAZORPAY_KEY,
+        amount: Number(amount),
+        currency: currency,
+        order_id: order_id,
+        name: "Accommodation Booking Website",
+        description:
+          "This is test accommodation booking website for only tutorial purpose.",
+        handler: async function (response) {
+          const data = {
+            orderCreationId: order_id,
+            razorpayPaymentId: response.razorpay_payment_id,
+            razorpayOrderId: response.razorpay_order_id,
+            razorpaySignature: response.razorpay_signature,
+            hotel: hotel?._id,
+            price: hotel?.price,
+            startDate,
+            endDate,
+          };
+          const result = await verification(data).unwrap();
+          alert(result.data.msg);
+        },
+      };
+      alert("booking success");
+      const razor = new window.Razorpay(options);
+      razor.open();
+    } catch (error) {
+      alert("something went wrong");
     }
-
-    const {amount, id: order_id, currency} = result;
-
-    const options = {
-      key: RAZORPAY_KEY,
-      amount: Number(amount),
-      currency: currency,
-      order_id: order_id,
-      name: "Accommodation Booking Website",
-      description:
-        "This is test accommodation booking website for only tutorial purpose.",
-      handler: async function (response) {
-        const data = {
-          orderCreationId: order_id,
-          razorpayPaymentId: response.razorpay_payment_id,
-          razorpayOrderId: response.razorpay_order_id,
-          razorpaySignature: response.razorpay_signature,
-          hotel: hotel?._id,
-          price: hotel?.price,
-          startDate,
-          endDate,
-        };
-        const result = await verification(data).unwrap();
-        alert(result.data.msg);
-      },
-    };
-    const razor = new window.Razorpay(options);
-    razor.open();
   };
+
+  if (!hotel) {
+    return <Loading />;
+  }
 
   return (
     <>

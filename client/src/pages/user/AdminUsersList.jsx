@@ -43,7 +43,7 @@ const AdminUsersList = () => {
 
     content = (
       <Row>
-        <Col>
+        <Col style={{overflowX: "scroll"}}>
           <Table striped bordered hover size="sm">
             <thead>
               <tr>

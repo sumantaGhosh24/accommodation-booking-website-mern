@@ -1,4 +1,5 @@
 import {Row} from "react-bootstrap";
+import propTypes from "prop-types";
 
 import {useGetRatingsQuery} from "../../app/features/rating/ratingApiSlice";
 import {Loading, RatingCard} from "../";
@@ -43,6 +44,10 @@ const HotelRating = ({id}) => {
   }
 
   return <>{content}</>;
+};
+
+HotelRating.propTypes = {
+  id: propTypes.string,
 };
 
 export default HotelRating;

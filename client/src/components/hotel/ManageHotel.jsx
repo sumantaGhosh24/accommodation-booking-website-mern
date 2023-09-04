@@ -1,5 +1,6 @@
 import {Badge} from "react-bootstrap";
 import {Link} from "react-router-dom";
+import propTypes from "prop-types";
 
 import {useGetHotelsQuery} from "../../app/features/hotel/hotelApiSlice";
 import {getWordStr} from "../../lib";
@@ -57,6 +58,11 @@ const ManageHotel = ({hotelId, ind}) => {
       </tr>
     );
   }
+};
+
+ManageHotel.propTypes = {
+  hotelId: propTypes.string,
+  ind: propTypes.number,
 };
 
 export default ManageHotel;

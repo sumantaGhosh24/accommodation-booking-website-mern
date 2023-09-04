@@ -85,11 +85,7 @@ const Header = () => {
 
   if (isError) {
     toast.error(error, {
-      position: toast.POSITION.TOP_RIGHT,
-      autoClose: 7000,
-      pauseOnFocusLoss: true,
       toastId: "logout-error",
-      delay: 300,
     });
   }
 
@@ -98,7 +94,7 @@ const Header = () => {
       <ToastContainer />
       <Navbar bg="primary" expand="lg">
         <Container>
-          <Navbar.Brand href="/" className="text-white">
+          <Navbar.Brand href="#" className="text-white">
             Accommodation
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />

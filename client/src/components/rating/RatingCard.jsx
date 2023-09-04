@@ -1,4 +1,5 @@
 import {Card, Col} from "react-bootstrap";
+import propTypes from "prop-types";
 
 import {useGetRatingsQuery} from "../../app/features/rating/ratingApiSlice";
 
@@ -19,7 +20,7 @@ const RatingCard = ({ratingId, id}) => {
             </Card.Text>
             <Card.Text className="mb-2" style={{fontSize: "18px"}}>
               <span className="fw-bold">Email: </span>
-              {/* {rating?.user.email} */}
+              {rating?.user.email}
             </Card.Text>
             <Card.Text className="mb-2" style={{fontSize: "18px"}}>
               <span className="fw-bold">Comment: </span>
@@ -38,6 +39,11 @@ const RatingCard = ({ratingId, id}) => {
       </Col>
     </>
   );
+};
+
+RatingCard.propTypes = {
+  ratingId: propTypes.string,
+  id: propTypes.string,
 };
 
 export default RatingCard;

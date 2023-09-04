@@ -1,5 +1,6 @@
 import {Badge} from "react-bootstrap";
 import {Link} from "react-router-dom";
+import propTypes from "prop-types";
 
 import {useGetHotelBookingQuery} from "../../app/features/booking/bookingApiSlice";
 
@@ -49,6 +50,11 @@ const ManageBooking = ({bookingId, id}) => {
       </tr>
     );
   } else return null;
+};
+
+ManageBooking.propTypes = {
+  bookingId: propTypes.string,
+  id: propTypes.number,
 };
 
 export default ManageBooking;

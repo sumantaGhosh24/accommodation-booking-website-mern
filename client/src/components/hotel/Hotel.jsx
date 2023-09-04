@@ -1,5 +1,6 @@
 import {Card, Col} from "react-bootstrap";
 import {Link} from "react-router-dom";
+import propTypes from "prop-types";
 
 import {useGetHotelsQuery} from "../../app/features/hotel/hotelApiSlice";
 import {getWordStr} from "../../lib";
@@ -47,6 +48,10 @@ const Hotel = ({hotelId}) => {
       </Col>
     );
   } else return null;
+};
+
+Hotel.propTypes = {
+  hotelId: propTypes.string,
 };
 
 export default Hotel;

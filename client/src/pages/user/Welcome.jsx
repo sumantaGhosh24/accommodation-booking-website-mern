@@ -99,7 +99,7 @@ const Welcome = () => {
                   </span>
                   <select
                     name="category"
-                    value={category}
+                    value={sCategory}
                     onChange={handleCategory}
                     className="p-2"
                   >

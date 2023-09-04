@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {Badge, Button, Card, Col, Container, Form, Row} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
+import propTypes from "prop-types";
 
 import {
   useDeleteUserMutation,
@@ -17,8 +18,8 @@ const EditUserForm = ({user}) => {
 
   const navigate = useNavigate();
 
-  const [active, setActive] = useState("");
-  const [role, setRole] = useState("");
+  const [active, setActive] = useState(user?.active);
+  const [role, setRole] = useState(user?.role);
 
   useEffect(() => {
     if (isSuccess || isDelSuccess) {
@@ -36,9 +37,9 @@ const EditUserForm = ({user}) => {
         active,
         role,
       }).unwrap();
-      toast.success(message);
+      toast.success(message, {toastId: "user-success"});
     } catch (error) {
-      toast.error(error?.data?.message);
+      toast.error(error?.data?.message, {toastId: "user-error"});
     }
   };
 
@@ -46,9 +47,9 @@ const EditUserForm = ({user}) => {
     e.preventDefault();
     try {
       const {message} = await deleteUser({id: user.id}).unwrap();
-      toast.success(message);
+      toast.success(message, {toastId: "user-success"});
     } catch (error) {
-      toast.error(error?.data?.message);
+      toast.error(error?.data?.message, {toastId: "user-error"});
     }
   };
 
@@ -160,6 +161,7 @@ const EditUserForm = ({user}) => {
                 <Form.Label>Active</Form.Label>
                 <Form.Select
                   name="active"
+                  value={active}
                   onChange={(e) => setActive(e.target.value)}
                 >
                   <option value="active">Active</option>
@@ -170,6 +172,7 @@ const EditUserForm = ({user}) => {
                 <Form.Label>Role</Form.Label>
                 <Form.Select
                   name="role"
+                  value={role}
                   onChange={(e) => setRole(e.target.value)}
                 >
                   <option value="user">User</option>
@@ -185,6 +188,10 @@ const EditUserForm = ({user}) => {
       </Container>
     </>
   );
+};
+
+EditUserForm.propTypes = {
+  user: propTypes.object,
 };
 
 export default EditUserForm;

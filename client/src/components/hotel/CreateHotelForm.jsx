@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
 import {Button, Col, Container, Image, Row, Form} from "react-bootstrap";
+import propTypes from "prop-types";
 
 import {useCreateHotelMutation} from "../../app/features/hotel/hotelApiSlice";
 import {convertToBase64} from "../../lib";
@@ -28,8 +29,7 @@ const CreateHotelForm = ({category}) => {
     state: "",
   });
 
-  const [createHotel, {isLoading, isSuccess, isError, error}] =
-    useCreateHotelMutation();
+  const [createHotel, {isLoading, isSuccess}] = useCreateHotelMutation();
 
   const handleFile = async (e) => {
     const file = e.target.files;
@@ -73,15 +73,15 @@ const CreateHotelForm = ({category}) => {
     e.preventDefault();
     try {
       const {message} = await createHotel(hotel).unwrap();
-      toast.success(message);
+      toast.success(message, {toastId: "hotel-success"});
     } catch (error) {
       if (error.status === "FETCH_ERROR") {
-        toast.error("server error");
+        toast.error("server error", {toastId: "hotel-error"});
       } else {
         if (typeof error.data.message === "object") {
-          toast.error(error?.data?.message);
+          toast.error(error?.data?.message, {toastId: "hotel-error"});
         } else {
-          toast.error(error?.data?.message);
+          toast.error(error?.data?.message, {toastId: "hotel-error"});
         }
       }
     }
@@ -275,6 +275,10 @@ const CreateHotelForm = ({category}) => {
       </div>
     </>
   );
+};
+
+CreateHotelForm.propTypes = {
+  category: propTypes.array,
 };
 
 export default CreateHotelForm;

@@ -1,5 +1,6 @@
 import {Badge} from "react-bootstrap";
 import {Link} from "react-router-dom";
+import propTypes from "prop-types";
 
 import {useGetAllUserQuery} from "../../app/features/user/usersApiSlice";
 
@@ -55,6 +56,11 @@ const ManageUser = ({userId, ind}) => {
       </tr>
     );
   } else return null;
+};
+
+ManageUser.propTypes = {
+  userId: propTypes.string,
+  ind: propTypes.number,
 };
 
 export default ManageUser;

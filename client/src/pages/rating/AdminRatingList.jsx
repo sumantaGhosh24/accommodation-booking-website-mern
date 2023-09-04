@@ -45,7 +45,7 @@ const AdminRatingList = () => {
       <Container className="my-5">
         <h2 className="mb-4 fw-bold">All Ratings</h2>
         <Row>
-          <Col>
+          <Col style={{overflowX: "scroll"}}>
             <Table striped bordered hover size="sm">
               <thead>
                 <tr>

@@ -2,18 +2,18 @@ import {useEffect, useState} from "react";
 import {Badge, Button, Card, Col, Container, Form, Row} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
+import propTypes from "prop-types";
 
 import {useUpdateBookingMutation} from "../../app/features/booking/bookingApiSlice";
 import {Loading} from "../";
 
 const EditBookingForm = ({booking}) => {
-  const [updateBooking, {isLoading, isSuccess, isError, error}] =
-    useUpdateBookingMutation();
+  const [updateBooking, {isLoading, isSuccess}] = useUpdateBookingMutation();
 
   const navigate = useNavigate();
 
-  const [isPaid, setIsPaid] = useState(null);
-  const [status, setStatus] = useState("");
+  const [isPaid, setIsPaid] = useState(booking?.isPaid);
+  const [status, setStatus] = useState(booking?.status);
 
   useEffect(() => {
     if (isSuccess) {
@@ -29,9 +29,9 @@ const EditBookingForm = ({booking}) => {
         isPaid,
         status,
       }).unwrap();
-      toast.success(message);
+      toast.success(message, {toastId: "booking-success"});
     } catch (error) {
-      toast.error(error?.data?.message);
+      toast.error(error?.data?.message, {toastId: "booking-error"});
     }
   };
 
@@ -100,7 +100,8 @@ const EditBookingForm = ({booking}) => {
               <Form.Group className="mb-3">
                 <Form.Label>Is Paid</Form.Label>
                 <Form.Select
-                  name="active"
+                  name="paid"
+                  value={isPaid}
                   onChange={(e) => setIsPaid(e.target.value)}
                 >
                   <option value={true}>Paid</option>
@@ -110,7 +111,8 @@ const EditBookingForm = ({booking}) => {
               <Form.Group className="mb-3">
                 <Form.Label>Status</Form.Label>
                 <Form.Select
-                  name="role"
+                  name="status"
+                  value={status}
                   onChange={(e) => setStatus(e.target.value)}
                 >
                   <option value="success">Success</option>
@@ -129,6 +131,10 @@ const EditBookingForm = ({booking}) => {
       </Container>
     </>
   );
+};
+
+EditBookingForm.propTypes = {
+  booking: propTypes.object,
 };
 
 export default EditBookingForm;

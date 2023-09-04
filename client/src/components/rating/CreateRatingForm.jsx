@@ -1,15 +1,13 @@
 import {useState} from "react";
 import {Button, Col, Form, Row} from "react-bootstrap";
+import {toast} from "react-toastify";
+import propTypes from "prop-types";
 
 import {useCreateRatingMutation} from "../../app/features/rating/ratingApiSlice";
 import {Loading} from "../";
 
 const CreateRatingForm = ({id}) => {
   const [createRating, {isLoading: createLoading}] = useCreateRatingMutation();
-
-  if (createLoading) {
-    return <Loading />;
-  }
 
   const [ratingData, setRatingData] = useState({
     comment: "",
@@ -26,11 +24,15 @@ const CreateRatingForm = ({id}) => {
     e.preventDefault();
     try {
       const {message} = await createRating(ratingData).unwrap();
-      toast.success(message);
+      toast.success(message, {toastId: "rating-success"});
     } catch (error) {
-      toast.error(error?.data?.message);
+      toast.error(error?.data?.message, {toastId: "rating-error"});
     }
   };
+
+  if (createLoading) {
+    return <Loading />;
+  }
 
   return (
     <>
@@ -68,6 +70,10 @@ const CreateRatingForm = ({id}) => {
       </Row>
     </>
   );
+};
+
+CreateRatingForm.propTypes = {
+  id: propTypes.string,
 };
 
 export default CreateRatingForm;

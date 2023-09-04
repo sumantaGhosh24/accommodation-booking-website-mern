@@ -37,13 +37,11 @@ const AdminBookingList = () => {
     const {ids} = booking;
     const tableContent =
       ids?.length &&
-      ids.map((bookingId, i) => (
-        <Booking key={bookingId} bookingId={bookingId} />
-      ));
+      ids.map((bookingId) => <Booking key={bookingId} bookingId={bookingId} />);
 
     content = (
       <Row>
-        <Col>
+        <Col style={{overflowX: "scroll"}}>
           <Table striped bordered hover size="sm">
             <thead>
               <tr>

@@ -68,9 +68,7 @@ const Register = () => {
         addressline2: "",
       });
       toast.success(message, {
-        position: toast.POSITION.TOP_RIGHT,
-        autoClose: 2000,
-        delay: 300,
+        toastId: "register-success",
       });
       setInterval(() => {
         navigate("/login");
@@ -78,28 +76,16 @@ const Register = () => {
     } catch (err) {
       if (err.status === "FETCH_ERROR") {
         toast.error("server error", {
-          position: toast.POSITION.TOP_RIGHT,
-          autoClose: 7000,
-          pauseOnFocusLoss: true,
           toastId: "register-error",
-          delay: 300,
         });
       } else {
         if (typeof err.data.message === "object") {
           toast.error(err?.data?.message[0], {
-            position: toast.POSITION.TOP_RIGHT,
-            autoClose: 7000,
-            pauseOnFocusLoss: true,
             toastId: "register-error",
-            delay: 300,
           });
         } else {
           toast.error(err?.data?.message, {
-            position: toast.POSITION.TOP_RIGHT,
-            autoClose: 7000,
-            pauseOnFocusLoss: true,
             toastId: "register-error",
-            delay: 300,
           });
         }
       }

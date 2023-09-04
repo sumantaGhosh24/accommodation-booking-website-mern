@@ -17,7 +17,7 @@ export const ratingApiSlice = apiSlice.injectEndpoints({
         });
         return ratingAdapter.setAll(initialState, loadedRating);
       },
-      providesTags: (result, error, arg) => {
+      providesTags: (result) => {
         if (result?.ids) {
           return [
             {type: "Rating", id: "LIST"},
@@ -35,7 +35,7 @@ export const ratingApiSlice = apiSlice.injectEndpoints({
         });
         return ratingAdapter.setAll(initialState, loadedRating);
       },
-      providesTags: (result, error, arg) => {
+      providesTags: (result) => {
         if (result?.ids) {
           return [
             {type: "Rating", id: "LIST"},
@@ -53,7 +53,7 @@ export const ratingApiSlice = apiSlice.injectEndpoints({
         });
         return ratingAdapter.setAll(initialState, loadedRating);
       },
-      providesTags: (result, error, arg) => {
+      providesTags: (result) => {
         if (result?.ids) {
           return [
             {type: "Rating", id: "LIST"},
