@@ -17,7 +17,7 @@ const ManageBooking = ({bookingId, id}) => {
         <td>{booking.id}</td>
         <td>
           {booking?.user?.email} || {booking?.user?.mobileNumber} ||{" "}
-          {booking?.user?.username} || {booking?.user?.image}
+          {booking?.user?.username}
         </td>
         <td>
           {booking?.hotel?.title}{" "}

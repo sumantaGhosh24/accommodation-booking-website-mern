@@ -9,13 +9,15 @@ const ManageMyBooking = ({bookingId}) => {
     selectFromResult: ({data}) => ({booking: data?.entities[bookingId]}),
   });
 
+  console.log(booking?.user);
+
   if (booking) {
     return (
       <tr>
         <td>{booking.id}</td>
         <td>
           {booking?.user?.email} || {booking?.user?.mobileNumber} ||{" "}
-          {booking?.user?.username} || {booking?.user?.image}
+          {booking?.user?.username}
         </td>
         <td>
           {booking?.hotel?.title}{" "}
