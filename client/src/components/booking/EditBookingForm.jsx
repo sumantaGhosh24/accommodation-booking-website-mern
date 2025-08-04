@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {Badge, Button, Card, Col, Container, Form, Row} from "react-bootstrap";
+import {Button, Card, Col, Container, Form, Row} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
 import propTypes from "prop-types";
@@ -12,7 +12,6 @@ const EditBookingForm = ({booking}) => {
 
   const navigate = useNavigate();
 
-  const [isPaid, setIsPaid] = useState(booking?.isPaid);
   const [status, setStatus] = useState(booking?.status);
 
   useEffect(() => {
@@ -26,7 +25,6 @@ const EditBookingForm = ({booking}) => {
     try {
       const {message} = await updateBooking({
         id: booking._id,
-        isPaid,
         status,
       }).unwrap();
       toast.success(message, {toastId: "booking-success"});
@@ -60,14 +58,6 @@ const EditBookingForm = ({booking}) => {
                   {booking?.price}
                 </Card.Text>
                 <Card.Text className="mb-3" style={{fontSize: "20px"}}>
-                  <span className="fw-bold">Paid: </span>
-                  {booking?.isPaid ? (
-                    <Badge bg="success">Paid</Badge>
-                  ) : (
-                    <Badge bg="danger">Not Paid</Badge>
-                  )}
-                </Card.Text>
-                <Card.Text className="mb-3" style={{fontSize: "20px"}}>
                   <span className="fw-bold">Payment Status: </span>
                   {booking?.paymentResult?.status}
                 </Card.Text>
@@ -97,17 +87,6 @@ const EditBookingForm = ({booking}) => {
                 borderRadius: "10px",
               }}
             >
-              <Form.Group className="mb-3">
-                <Form.Label>Is Paid</Form.Label>
-                <Form.Select
-                  name="paid"
-                  value={isPaid}
-                  onChange={(e) => setIsPaid(e.target.value)}
-                >
-                  <option value={true}>Paid</option>
-                  <option value={false}>Not Paid</option>
-                </Form.Select>
-              </Form.Group>
               <Form.Group className="mb-3">
                 <Form.Label>Status</Form.Label>
                 <Form.Select

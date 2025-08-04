@@ -109,12 +109,8 @@ const EditUserForm = ({user}) => {
                   {user?.zip}
                 </Card.Text>
                 <Card.Text className="mb-3" style={{fontSize: "20px"}}>
-                  <span className="fw-bold">Address Line 1: </span>
-                  {user?.addressline1}
-                </Card.Text>
-                <Card.Text className="mb-3" style={{fontSize: "20px"}}>
-                  <span className="fw-bold">Address Line 2: </span>
-                  {user?.addressline2}
+                  <span className="fw-bold">Address Line: </span>
+                  {user?.addressline}
                 </Card.Text>
                 <Card.Text className="mb-3" style={{fontSize: "20px"}}>
                   <span className="fw-bold">Created At: </span>

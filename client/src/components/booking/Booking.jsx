@@ -1,4 +1,3 @@
-import {Badge} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import propTypes from "prop-types";
 
@@ -24,13 +23,6 @@ const Booking = ({bookingId}) => {
           </Link>
         </td>
         <td>{booking.price}</td>
-        <td>
-          {booking.isPaid ? (
-            <Badge bg="success">Paid</Badge>
-          ) : (
-            <Badge bg="danger">Not Paid</Badge>
-          )}
-        </td>
         <td>{booking?.paymentResult?.status}</td>
         <td>{booking.startDate}</td>
         <td>{booking.endDate}</td>

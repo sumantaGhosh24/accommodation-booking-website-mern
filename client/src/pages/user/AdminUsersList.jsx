@@ -61,8 +61,7 @@ const AdminUsersList = () => {
                 <th>City</th>
                 <th>State</th>
                 <th>Country</th>
-                <th>Address Line 1</th>
-                <th>Address Line 2</th>
+                <th>Address Line</th>
                 <th>Active</th>
                 <th>Role</th>
                 <th>Created At</th>

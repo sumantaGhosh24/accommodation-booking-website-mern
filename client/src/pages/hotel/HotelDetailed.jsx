@@ -8,8 +8,8 @@ import {
   useGetRazorpayMutation,
   useVerificationMutation,
 } from "../../app/features/payment/paymentApiSlice";
-import {RAZORPAY_KEY} from "../../config";
 import {CreateRatingForm, HotelRating, Loading} from "../../components";
+// import {VITE_RAZORPAY_KEY} from '../../config'
 
 const HotelDetailed = () => {
   useTitle("Hotel Detailed");
@@ -36,7 +36,7 @@ const HotelDetailed = () => {
       const {amount, id: order_id, currency} = result;
 
       const options = {
-        key: RAZORPAY_KEY,
+        key: import.meta.env.VITE_RAZORPAY_KEY,
         amount: Number(amount),
         currency: currency,
         order_id: order_id,

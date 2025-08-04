@@ -49,7 +49,6 @@ const AdminBookingList = () => {
                 <th>User</th>
                 <th>Hotel</th>
                 <th>Price</th>
-                <th>Is Paid</th>
                 <th>Payment Result</th>
                 <th>Start Date</th>
                 <th>End Date</th>

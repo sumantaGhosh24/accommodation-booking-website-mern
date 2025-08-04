@@ -26,8 +26,7 @@ const Register = () => {
     country: "",
     state: "",
     zip: "",
-    addressline1: "",
-    addressline2: "",
+    addressline: "",
   });
 
   const navigate = useNavigate();
@@ -64,8 +63,7 @@ const Register = () => {
         country: "",
         state: "",
         zip: "",
-        addressline1: "",
-        addressline2: "",
+        addressline: "",
       });
       toast.success(message, {
         toastId: "register-success",
@@ -280,7 +278,7 @@ const Register = () => {
                   </Col>
                 </Row>
                 <Row>
-                  <Col lg={{span: 4}} md={{span: 12}}>
+                  <Col lg={{span: 6}} md={{span: 12}}>
                     <Form.Group className="mb-3">
                       <Form.Label>Zip</Form.Label>
                       <Form.Control
@@ -293,29 +291,16 @@ const Register = () => {
                       />
                     </Form.Group>
                   </Col>
-                  <Col lg={{span: 4}} md={{span: 12}}>
+                  <Col lg={{span: 6}} md={{span: 12}}>
                     <Form.Group className="mb-3">
-                      <Form.Label>Address Line 1</Form.Label>
+                      <Form.Label>Address Line</Form.Label>
                       <Form.Control
                         type="text"
-                        placeholder="Enter your address line 1"
+                        placeholder="Enter your address line"
                         size="lg"
-                        name="addressline1"
+                        name="addressline"
                         onChange={handleChange}
-                        value={user.addressline1}
-                      />
-                    </Form.Group>
-                  </Col>
-                  <Col lg={{span: 4}} md={{span: 12}}>
-                    <Form.Group className="mb-3">
-                      <Form.Label>Address Line 2</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="Enter your address line 2"
-                        size="lg"
-                        name="addressline2"
-                        onChange={handleChange}
-                        value={user.addressline2}
+                        value={user.addressline}
                       />
                     </Form.Group>
                   </Col>

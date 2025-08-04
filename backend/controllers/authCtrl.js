@@ -20,8 +20,7 @@ const authCtrl = {
         state,
         country,
         zip,
-        addressline1,
-        addressline2,
+        addressline,
       } = req.body;
       const errors = [];
       for (const key in req.body) {
@@ -70,8 +69,7 @@ const authCtrl = {
         country: country.toLowerCase(),
         state: state.toLowerCase(),
         zip,
-        addressline1,
-        addressline2,
+        addressline,
       });
       await newUser.save();
       return res.status(201).json({message: "User registration successful."});

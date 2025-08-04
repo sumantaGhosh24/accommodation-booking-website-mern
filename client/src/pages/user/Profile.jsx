@@ -178,24 +178,13 @@ const Profile = () => {
                   </div>
                   <div className="mb-3">
                     <p className="fw-bold mb-1" style={{fontSize: "18px"}}>
-                      Address Line 1
+                      Address Line
                     </p>
                     <p
                       style={{fontWeight: "500", fontSize: "16px"}}
                       className="text-capitalize"
                     >
-                      {user.addressline1}
-                    </p>
-                  </div>
-                  <div className="mb-3">
-                    <p className="fw-bold mb-1" style={{fontSize: "18px"}}>
-                      Address Line 2
-                    </p>
-                    <p
-                      style={{fontWeight: "500", fontSize: "16px"}}
-                      className="text-capitalize"
-                    >
-                      {user.addressline2}
+                      {user.addressline}
                     </p>
                   </div>
                 </div>

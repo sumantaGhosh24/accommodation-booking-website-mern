@@ -15,13 +15,12 @@ const bookingCtrl = {
   },
   updateBooking: async (req, res) => {
     try {
-      const {status, isPaid, id} = req.body;
+      const {status, id} = req.body;
       const booking = await Booking.findById(id).exec();
       if (!booking) {
         return res.status(400).json({message: "Booking not found."});
       }
       booking.status = status;
-      booking.isPaid = isPaid;
       await booking.save();
       return res.json({message: "Booking updated successful."});
     } catch (error) {

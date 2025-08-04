@@ -36,8 +36,7 @@ const ManageUser = ({userId, ind}) => {
         <td>{user.city}</td>
         <td>{user.state}</td>
         <td>{user.country}</td>
-        <td>{user.addressline1}</td>
-        <td>{user.addressline2}</td>
+        <td>{user.addressline}</td>
         <td>
           {user.active === "active" ? (
             <Badge bg="success">Active</Badge>

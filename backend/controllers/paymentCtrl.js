@@ -65,7 +65,6 @@ const paymentCtrl = {
         endDate: endDate,
         price: price,
         status: "pending",
-        isPaid: true,
       });
       await newBooking.save();
 
