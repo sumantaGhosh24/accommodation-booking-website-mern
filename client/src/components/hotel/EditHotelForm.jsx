@@ -150,6 +150,7 @@ const EditHotelForm = ({hotel}) => {
                 alt="picture"
                 thumbnail
                 roundedCircle
+                style={{height: "300px"}}
               />
             </div>
             <Form.Group className="mb-3">

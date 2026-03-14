@@ -111,6 +111,7 @@ const EditCategoryForm = ({category}) => {
                 alt="category"
                 thumbnail
                 roundedCircle
+                style={{height: "300px"}}
               />
             </div>
             <Form.Group className="mb-3">
